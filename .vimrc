@@ -25,7 +25,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'jmcantrell/vim-virtualenv'
-Bundle 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 
 " " All of your Plugins must be added before the following line
 
@@ -48,6 +48,7 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 set splitright               " split L/R by default
 set clipboard=unnamed        " clipboard
+set cursorline	             " highlight current line
 
 " Split Modications (ctrl-jklh is redundant)
 " split navigations
@@ -67,15 +68,15 @@ nnoremap <space> za
 " Show folded code docstrings
 let g:SimpylFold_docstring_preview=1
 " PEP8 indent
-au BufNewFile,BufRead *.py;
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
     \ set fileformat=unix
-filetype indent on
+
 " Python whitespace
 highlight BadWhitespace ctermbg=red guibg=darkred
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
