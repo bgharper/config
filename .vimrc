@@ -8,44 +8,41 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 let g:vundle_default_git_proto = 'git'
 
-"
- " alternatively, pass a path where Vundle should install plugins
-" "call vundle#begin('~/some/path/here')
-" " let Vundle manage Vundle, required
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+" let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-" " Add all your plugins here (note older versions of Vundle used Bundle
-" instead of Plugin)
 "" Make sure plugin is installed w/ vundle 
-Plugin 'tmhedberg/SimpylFold'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'scrooloose/syntastic'
-Plugin 'vim-scripts/indentpython.vim'
 Plugin 'nvie/vim-flake8'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Plugin 'jmcantrell/vim-virtualenv'
+" YCM needs manual installation, see website
 Plugin 'Valloric/YouCompleteMe'
 
 " " All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 " Plugin descriptions: SimpyFold - python code folding. 
 " Syntastic: lint support, flake8 - pep8 highlighitng
 " Ctrlp - search, vim-fug - git, 
-" Python highlighting, line numbering
 
-let python_highlight_all=1
+" syntax, numbering
 syntax on
 set nu
 
+" solarized install: cp
+" ~/.vim/bundle/vim-colors-solarized/colors/solarized.vim ~/.vim/colors/
 " Note: need colors = 16 for iterm in mac when already using solarized
+" try 256 on linux
 let g:solarized_termcolors=16
 syntax enable
 set background=light
 colorscheme solarized
 
-call vundle#end()            " required
-filetype plugin indent on    " required
 set splitright               " split L/R by default
 set clipboard=unnamed        " clipboard
 set cursorline	             " highlight current line
@@ -65,27 +62,13 @@ set foldlevel=99
 " Enable folding with the spacebar
 nnoremap <space> za
 
-" Show folded code docstrings
-let g:SimpylFold_docstring_preview=1
-" PEP8 indent
-au BufNewFile,BufRead *.py
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set textwidth=79 |
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix
-
-" Python whitespace
-highlight BadWhitespace ctermbg=red guibg=darkred
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-
 " Syntastic settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+" disable syntastic on the statusline
+let g:statline_syntastic = 0
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
@@ -93,3 +76,6 @@ let g:syntastic_check_on_wq = 0
 " YCM settings
 let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+set exrc
+set secure
